@@ -12,7 +12,8 @@ module Roadie
 
       def find_stylesheet(name)
         if (asset = find_asset_in_pipeline(name))
-          Stylesheet.new("#{asset.pathname} (live compiled)", asset.to_s)
+          path = asset.respond_to?(:filename) ? asset.filename : asset.pathname
+          Stylesheet.new("#{path} (live compiled)", asset.to_s)
         end
       end
 
